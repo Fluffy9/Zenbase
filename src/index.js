@@ -9,21 +9,33 @@ function factory(opt){
     opt.revision = 0;
     var store = {}
     const { publicKey, privateKey } = genKeyPairFromSeed(opt.secret);
+    debug = opt.debug
 
     store.put = function(key, data, cb){
-        if(debug) console.log('[Put] \nKey: '+ key + " \nData: " + data || null);
+        if(debug){
+            console.log('[Put] \nKey: '+ key + " \nData: " + data || null);
+            debugger
+        } 
         if(data){
             client.db.setJSON(privateKey, key, data).catch(err => {
-                if(debug) console.log('Put Error: ', err)
+                if(debug) {
+                    console.log('Put Error: ', err)
+                    debugger
+                }
                 cb(err, 'skynet')
             })
         }
     }
     store.get = function(key, cb){
-        if(debug) console.log('[Get] \nKey: ' + key);
+        if(debug) {
+            console.log('[Get] \nKey: ' + key);
+            debugger
+        }
         client.db.getJSON(publicKey, key).then(data => {cb(null, data)}).catch((err) => {
-            if(debug) console.log('Get Error: ', err)
-            //cb(err, 'skynet')
+            if(debug){
+                console.log('Get Error: ', err)
+                debugger
+            } 
             cb(null, null)
         })
     }

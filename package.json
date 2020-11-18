@@ -1,6 +1,6 @@
 {
   "name": "zenbase",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "GunDB storage adapter for Sia SkynetDB",
   "files": [
     "lib"
