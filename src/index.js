@@ -13,11 +13,11 @@ function factory(opt){
 
     store.put = function(key, data, cb){
         if(debug){
-            console.log('[Put] \nKey: '+ key + " \nData: " + data || null);
+            console.log('[Put] \nKey: '+ key + " \nData: " + data || undefined);
             debugger
         } 
         if(data){
-            client.db.setJSON(privateKey, key, data).catch(err => {
+            client.db.setJSON(privateKey, key, data || undefined).catch(err => {
                 if(debug) {
                     console.log('Put Error: ', err)
                     debugger
@@ -36,7 +36,7 @@ function factory(opt){
                 console.log('Get Error: ', err)
                 debugger
             } 
-            cb(null, null)
+            cb(null, undefined)
         })
     }
     return store
