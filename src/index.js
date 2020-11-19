@@ -1,6 +1,5 @@
 
 import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-const client = new SkynetClient();
 var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
 if(!Gun){ throw "Gun is undefined"}
 var debug = false
@@ -9,6 +8,7 @@ function factory(opt){
     opt.revision = 0;
     var store = {}
     const { publicKey, privateKey } = genKeyPairFromSeed(opt.secret);
+    const client = new SkynetClient(opt.portal || "https://siasky.net");
     debug = opt.debug
 
     store.put = function(key, data, cb){
