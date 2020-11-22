@@ -43,7 +43,7 @@ Even assuming higher storage costs for higher duplication / better web availabil
 
 ## Getting Started
 
-Interactive tutorial here: https://starboard.gg/Zenbase/Usage-nl2QbJ2
+Interactive tutorial here: https://starboard.gg/nb/nl2QbJ2
 
 ```HTML
 <html>
