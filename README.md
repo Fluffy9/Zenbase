@@ -41,6 +41,47 @@ Even assuming higher storage costs for higher duplication / better web availabil
 
 5. It's open source! 😁
 
+## Getting Started
+
+Interactive tutorial here: https://starboard.gg/Zenbase/Usage-nl2QbJ2
+
+```HTML
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/radix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/radisk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
+<script src="https://unpkg.com/zenbase/main.js"></script>
+<script>
+let hello_world = ""
+
+// Initialize gun.
+// [localStorage] We are turning localStorage to false for testing purposes. Generally, you'd want that to be true
+// [secret] Secret should be something long and secure. Your data will be saved to Skynet using that secret
+// [portal] Skynet portal you'd like to use. Use a portal you trust or run your own. They could potentially manipulate your data (although I don't see why) 
+// [debug] Show debug output
+window.gun = new Gun({
+    localStorage: false,
+    secret: "YOUR_SECRET_HERE",
+    portal: "https://siasky.net",
+    debug: false,
+})
+
+// Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
+gun.get('hello').put({ name: "world" });
+// Get data into gun. This will pull from memory, then localStorage (disabled), then Skynet
+gun.get('hello').on(data => { 
+  hello_world = data['name']
+	alert("hello: " + hello_world)
+})
+</script>
+</head>
+<body>
+</body>
+</html>
+```
 
 ## Credits
 * GunDB
