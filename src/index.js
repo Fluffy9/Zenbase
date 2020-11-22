@@ -1,9 +1,9 @@
 
 import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
 var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
-if(!Gun){ throw "Gun is undefined"}
+if (!Gun) { throw "Gun is undefined" }
 var debug = false
-function factory(opt){
+function factory(opt) {
     opt.file = String(opt.file || 'radata');
     opt.revision = 0;
     var store = {}
@@ -11,31 +11,34 @@ function factory(opt){
     const client = new SkynetClient(opt.portal || "https://siasky.net");
     debug = opt.debug
 
-    store.put = function(key, data, cb){
-        if(debug){
-            console.log('[Put] \nKey: '+ key + " \nData: " + data || undefined);
+    store.put = function (key, data, cb) {
+        if (debug) {
+            console.log('[Put] \nKey: ' + key + " \nData: " + JSON.stringify(data));
             debugger
-        } 
-        if(data){
-            client.db.setJSON(privateKey, key, data || undefined).catch(err => {
-                if(debug) {
-                    console.log('Put Error: ', err)
+        }
+        if (data) {
+            client.db.setJSON(privateKey, key, data).then(() => {cb(null,1)}).catch(err => {
+                if (debug) {
+                    console.log('Put Error: ', JSON.stringify(err))
                     debugger
                 }
                 cb(err, 'skynet')
             })
         }
     }
-    store.get = function(key, cb){
-        if(debug) {
+    store.get = function (key, cb) {
+        if (debug) {
             console.log('[Get] \nKey: ' + key);
             debugger
         }
-        client.db.getJSON(publicKey, key).then(data => {cb(null, data)}).catch((err) => {
-            if(debug){
-                console.log('Get Error: ', err)
+        client.db.getJSON(publicKey, key).then(data => {
+            if (debug) { console.log("Retrieved Data: " + JSON.stringify(data)); }
+            cb(null, data['data'] || undefined) })
+        .catch((err) => {
+            if (debug) {
+                console.log('Get Error: ', JSON.stringify(err))
                 debugger
-            } 
+            }
             cb(null, undefined)
         })
     }
@@ -43,7 +46,7 @@ function factory(opt){
 
 }
 
-Gun.on('create', function(root){
+Gun.on('create', function (root) {
     this.to.next(root);
     root.opt.store = root.opt.store || factory(root.opt);
 })
