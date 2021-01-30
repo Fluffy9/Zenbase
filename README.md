@@ -86,3 +86,7 @@ gun.get('hello').on(data => {
 ## Credits
 * GunDB
 * Sia SkynetDB
+
+## More about the project
+
+https://www.indiehackers.com/product/zenbase
