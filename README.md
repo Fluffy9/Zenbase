@@ -82,6 +82,16 @@ gun.get('hello').on(data => {
 </body>
 </html>
 ```
+## Donators (In order of contribution)
+* griffgreen
+* bit-7
+* aaronfye
+* caipeng2006
+* luxebeng
+* itsoso
+* davidkieve
+* kellyna56
+* [More](https://gitcoin.co/grants/1629/zenbase)
 
 ## Credits
 * GunDB
