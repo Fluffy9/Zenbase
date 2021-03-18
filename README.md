@@ -94,6 +94,7 @@ gun.get('hello').on(data => {
 🏅 luxebeng
 🏅 itsoso
 🏅 usmankler
+🏅 itsoso
 ```
  ... [and more](https://gitcoin.co/grants/1629/zenbase)
 
