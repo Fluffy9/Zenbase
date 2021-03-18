@@ -92,9 +92,9 @@ gun.get('hello').on(data => {
 🏅 yaobr
 🏅 traviagio
 🏅 luxebeng
-🏅 itsoso
 🏅 usmankler
 🏅 itsoso
+🏅 davidkieve
 ```
  ... [and more](https://gitcoin.co/grants/1629/zenbase)
 
