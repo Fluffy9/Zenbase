@@ -87,13 +87,13 @@ gun.get('hello').on(data => {
 🏆 aaronfye
 🥈 griffgreen
 🥉 bit-7
+🎖 julietea
+🎖 slayerizedkoala
+🎖 prometheusminer
 🎖 caipeng2006
-🎖prometheusminer
 🎖 yaobr
 🎖 traviagio
 🎖 luxebeng
-🎖 usmankler
-🎖 itsoso
 ```
  ... [and more](https://gitcoin.co/grants/1629/zenbase)
 
