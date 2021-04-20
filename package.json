@@ -27,7 +27,6 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "gun": "^0.2020.520",
-    "skynet-js": "^2.6.0"
+    "skynet-js": "^2.9.0"
   }
 }

@@ -1,7 +1,6 @@
 
-import Gun from "gun";
 import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-//var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
+var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
 
 if (!Gun) { throw "Gun is undefined" }
 var debug = false
