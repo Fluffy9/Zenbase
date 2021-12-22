@@ -1,6 +1,6 @@
 
-import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
+const { SkynetClient, genKeyPairFromSeed } = ('undefined' !== typeof window) ? window.skynet : require("skynet-js")
+const Gun = ('undefined' !== typeof window) ? window.Gun : require('gun')
 
 if (!Gun) { throw "Gun is undefined" }
 var debug = false
@@ -44,10 +44,12 @@ function factory(opt) {
         })
     }
     return store
-
 }
 
 Gun.on('create', function (root) {
     this.to.next(root);
     root.opt.store = root.opt.store || factory(root.opt);
 })
+try {
+    exports.zenbase = Gun
+} catch (e) {}
