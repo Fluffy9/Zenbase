@@ -1,4 +1,3 @@
-
 const { SkynetClient, genKeyPairFromSeed } = ('undefined' !== typeof window) ? window.skynet : require("skynet-js")
 const Gun = ('undefined' !== typeof window) ? window.Gun : require('gun')
 
