@@ -1,19 +1,16 @@
-
 // import skynet and gun, make sure webpack does it right for nodejs vs client side
-import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-var Gun = ('undefined' !== typeof window) ? window.Gun : __non_webpack_require__('gun')
-if (!Gun) { throw "Gun is undefined" }
+const { SkynetClient, genKeyPairFromSeed } = ('undefined' !== typeof window) ? window.skynet : require("skynet-js")
+const Gun = ('undefined' !== typeof window) ? window.Gun : require('gun')
 
 // if this is true, we print extra logs and have debugger statements to make debugging easier
+if (!Gun) { throw "Gun is undefined" }
 var debug = false
-
 /**
  * this is the schema gun uses for storage adapters. The opt object also contains user-defined settings. Example here: https://github.com/amark/gun/blob/master/lib/rs3.js
  * @param {*} opt currently `secret`, `portal`, `debug`, are the custom options in this storage adapter
  * @returns 
  */
 function factory(opt) {
-
     opt.file = String(opt.file || 'radata');
     opt.revision = 0;
     var store = {}
@@ -24,14 +21,13 @@ function factory(opt) {
     // set debug from the `debug` option
     debug = opt.debug
 
-    
     /**
      * this is the schema gun uses when it wants to save data
      * @param {*} key the key used to retreive data 
      * @param {*} data the data that is set
      * @param {*} cb some gun object that returns data
      */
-    store.put = function (key, data, cb) {
+     store.put = function (key, data, cb) {
         // if the debug setting is on, print the key and the data we're storing to skynet, and pause execution using debugger statement
         if (debug) {
             console.log('[Put] \nKey: ' + key + " \nData: " + JSON.stringify(data));
@@ -57,7 +53,7 @@ function factory(opt) {
      * @param {*} key the key used to retrieve the data
      * @param {*} cb some gun object that returns the data
      */
-    store.get = function (key, cb) {
+     store.get = function (key, cb) {
         // if the debug setting is on, print the key we're using to retrieve from skynet, and pause execution using debugger statement
         if (debug) {
             console.log('[Get] \nKey: ' + key);
@@ -69,19 +65,18 @@ function factory(opt) {
             if (debug) { console.log("Retrieved Data: " + JSON.stringify(data)); }
             // Pass the data back to gun. In the case where the data returned is null or something we'll return undefined
             cb(null, data['data'] || undefined) })
-        .catch((err) => {
+            .catch((err) => {
             // if there is an error and debugging is on, make it easier to debug
             // gun throws a lot of errors even if it succeeds though ¯\_(ツ)_/¯
             if (debug) {
-                console.log('Get Error: ', JSON.stringify(err))
-                debugger
-            }
+                    console.log('Get Error: ', JSON.stringify(err))
+                    debugger
+                }
             // return nothing
             cb(null, undefined)
         })
     }
     return store
-
 }
 
 // more storage adapter schema
@@ -89,3 +84,8 @@ Gun.on('create', function (root) {
     this.to.next(root);
     root.opt.store = root.opt.store || factory(root.opt);
 })
+
+// if modules are available we'll make an export too
+try {
+    exports.zenbase = Gun
+} catch (e) {}
