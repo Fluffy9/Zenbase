@@ -1,6 +1,6 @@
 {
   "name": "zenbase",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "GunDB storage adapter for Sia SkynetDB",
   "main": "src/index.js",
   "files": [

@@ -64,8 +64,8 @@ function factory(opt) {
             // if we're debugging, log the data we retrieved
             if (debug) { console.log("Retrieved Data: " + JSON.stringify(data)); }
             // Pass the data back to gun. In the case where the data returned is null or something we'll return undefined
-            cb(null, data['data'] || undefined) })
-            .catch((err) => {
+          if (!data['data']['!']) {cb(null, JSON.stringify(data['data']) || undefined)} else { cb(null, undefined)} })
+          .catch((err) => {
             // if there is an error and debugging is on, make it easier to debug
             // gun throws a lot of errors even if it succeeds though ¯\_(ツ)_/¯
             if (debug) {
