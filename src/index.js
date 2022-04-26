@@ -30,17 +30,17 @@ function factory(opt) {
      store.put = function (key, data, cb) {
         // if the debug setting is on, print the key and the data we're storing to skynet, and pause execution using debugger statement
         if (debug) {
-            console.log('[Put] \nKey: ' + key + " \nData: " + JSON.stringify(data));
+            console.log('>>> [Put] \n>>> Key: ' + key + " \n>>> Data: " + data);
             debugger
         }
         // if there is data to be stored, pass that data to skynet
         if (data) {
             // save the json to skynet. We will pass in null to cb since we're not returning anything
-            client.db.setJSON(privateKey, key, data).then(() => {cb(null,1)}).catch(err => {
+           client.db.setJSON(privateKey, key, JSON.parse(data)).then(() => {cb(null,1)}).catch(err => {
                 // if there is an error and debugging is on, make it easier to debug
                 // gun throws a lot of errors even if it succeeds though ¯\_(ツ)_/¯
                 if (debug) {
-                    console.log('Put Error: ', JSON.stringify(err))
+                    console.log('>>> Put Error: ', JSON.stringify(err))
                     debugger
                 }
                 // return the error
@@ -56,20 +56,20 @@ function factory(opt) {
      store.get = function (key, cb) {
         // if the debug setting is on, print the key we're using to retrieve from skynet, and pause execution using debugger statement
         if (debug) {
-            console.log('[Get] \nKey: ' + key);
+            console.log('>>> [Get] \nKey: ' + key);
             debugger
         }
         // ask skynet for the data
         client.db.getJSON(publicKey, key).then(data => {
             // if we're debugging, log the data we retrieved
-            if (debug) { console.log("Retrieved Data: " + JSON.stringify(data)); }
+            if (debug) { console.log(">>> Retrieved Data: " + JSON.stringify(data)); }
             // Pass the data back to gun. In the case where the data returned is null or something we'll return undefined
           if (!data['data']['!']) {cb(null, JSON.stringify(data['data']) || undefined)} else { cb(null, undefined)} })
           .catch((err) => {
             // if there is an error and debugging is on, make it easier to debug
             // gun throws a lot of errors even if it succeeds though ¯\_(ツ)_/¯
             if (debug) {
-                    console.log('Get Error: ', JSON.stringify(err))
+                    console.log('>>> Get Error: ', JSON.stringify(err))
                     debugger
                 }
             // return nothing
