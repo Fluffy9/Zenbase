@@ -54,7 +54,7 @@ The Interactive tutorial has been updated: https://starboard.gg/nb/nl2QbJ2
 <script src="https://cdn.jsdelivr.net/npm/gun/lib/radisk.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
-<script src="https://skynet-js.hns.siasky.net/4.0-beta/index.js"></script>
+<script src="https://skynet-js.hns.siasky.net/4.1/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/zenbase/src/index.js"></script>
 <script>
 let hello_world = ""

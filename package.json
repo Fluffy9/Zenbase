@@ -24,7 +24,7 @@
   "author": "fluffy9",
   "license": "MIT",
   "dependencies": {
-    "gun": "^0.2020.1235",
-    "skynet-js": "^3.0.2"
+    "gun": "^0.2020.1236",
+    "skynet-js": "^4.1.0"
   }
 }
